@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VocabVibe.View
+namespace VocabVibe.View.UC
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для HardView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HardView : UserControl
     {
-        public MainWindow()
+        public HardView()
         {
             InitializeComponent();
-            MainFrame.Content = new MainMenu();
         }
     }
 }

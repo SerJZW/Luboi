@@ -1,0 +1,7 @@
+﻿father:отец
+mother:мама
+parents:родители
+son:сын
+daughter:дочь
+sister:сестра
+brother:брат

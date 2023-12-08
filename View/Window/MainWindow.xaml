@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="VocabVibe" Height="720" Width="1080" ResizeMode="NoResize">
     <Grid>
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden"></Frame>
+        <ContentControl Grid.Row="1" Name="MyContentControl" Content="{Binding ContentSwitch.MyContentControl}"/>
     </Grid>
 </Window>

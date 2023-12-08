@@ -1,0 +1,7 @@
+﻿appearance:внешность
+height:рост
+build:телосложение
+hair:волосы
+eyes:глаза
+face:лицо
+nose:нос

@@ -1,0 +1,17 @@
+english:английский
+close:близкий
+loving:любящий
+friendly:дружелюбный
+fine:прекрасный
+town:городок
+lawn:лужайка
+square:площадь
+the centre:центр
+street:улица
+place:место
+mother:мама
+parents:родители
+son:сын
+daughter:дочь
+sister:сестра
+brother:брат

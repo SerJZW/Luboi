@@ -1,0 +1,7 @@
+﻿weather:погода
+fine:прекрасный
+terrible:ужасный
+cold:холодный
+hot:жаркий
+warm:теплый
+the sky:небо

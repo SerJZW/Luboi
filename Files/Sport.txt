@@ -1,0 +1,7 @@
+sport:спорт
+sportsman:спортсмен
+match:матч
+competition:соревнование
+train:тренироваться
+gym:спортзал
+wrestling:борьба

@@ -1,0 +1,7 @@
+city:большой город
+town:городок
+lawn:лужайка
+square:площадь
+the centre:центр
+street:улица
+place:место

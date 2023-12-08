@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="VocabVibe.View.UC.EasyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VocabVibe.View.UC"
+             mc:Ignorable="d" 
+             Height="720" Width="1080">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#687EFF" Offset="0.2"/>
+                <GradientStop Color="#8194D9" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TextBlock Text="VocabVibe" Style="{StaticResource LogoText}" Margin="0,10,0,0" FontSize="35"/>
+        <Rectangle Fill="Transparent" Width="1134" RadiusX="25" RadiusY="25" Margin="0,77,0,173"  Stroke="#fff" StrokeThickness="8" HorizontalAlignment="Center" Grid.Row="1"/>
+        <DockPanel VerticalAlignment="Top" Margin="20,128,0,0" Grid.Row="1" Height="200">
+            <Button Content="🌦️ Погода" Margin="5,0,10,0" 
+        Style="{StaticResource LearnBut}"/>
+            <Button Content="🏡 Семья и друзья" Margin="10,0,10,0" 
+        Style="{StaticResource LearnBut}"/>
+            <Button Content="🎭 Внешность" Margin="10,0,10,0" 
+        Style="{StaticResource LearnBut}"/>
+        </DockPanel>
+        <Button Content="Выход" Style="{StaticResource MenuBut}" Command="{Binding SomethingViewModel.ExitCommand}" 
+                HorizontalAlignment="Left" Margin="920,470,0,0" VerticalAlignment="Top"
+                Grid.Row="1" Height="41" Width="133"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Изучение" Foreground="White" FontFamily="Verdana"
+               Background="#8150C6" BorderThickness="3" Width="270" Height="57" Margin="100,20,0,0"
+               BorderBrush="#8150C6" FontSize="30" Style="{StaticResource MenuBut}">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="25"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button  
+               Content="Словарь" Margin="35,20,0,0" Command="{Binding ContentSwitch.SetObject}" CommandParameter="VocabularyView"
+               Style="{StaticResource MenuBut}"/>
+            <Button  
+               Content="Прогресс" Margin="35,20,0,0" 
+               Style="{StaticResource MenuBut}" Command="{Binding ContentSwitch.SetObject}" CommandParameter="ProgressView"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

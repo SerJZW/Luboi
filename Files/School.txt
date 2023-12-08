@@ -1,0 +1,7 @@
+strict:строгий
+kind:добрый
+subject:предмет
+lesson:урок
+study:учиться
+learn:учить, узнавать
+uniform:форму

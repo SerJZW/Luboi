@@ -1,0 +1,7 @@
+typical:типичный
+close:близкий
+loving:любящий
+friendly:дружелюбный
+caring:заботливый
+independent:независимый
+smart:сообразительный
