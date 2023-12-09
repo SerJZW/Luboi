@@ -13,7 +13,7 @@ namespace VocabVibe.View
         public ProgressView()
         {
             InitializeComponent();
-            var WordsArray = File.ReadAllLines("C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\Vocab.txt");
+            var WordsArray = File.ReadAllLines("C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\Progress.txt");
             Count.Text = WordsArray.Length.ToString();
         }
     }

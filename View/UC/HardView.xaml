@@ -25,7 +25,7 @@
         Style="{StaticResource LearnBut}" Command="{Binding ContentSwitch.SelectedCategory}" CommandParameter="Sport"/>
             <Button Content="✈︎ Город" Command="{Binding ContentSwitch.SelectedCategory}" CommandParameter="City" Margin="10,0,0,0" 
         Style="{StaticResource LearnBut}"/>
-            <Button Content="💼 Профессии" Margin="0,0,10,0" 
+            <Button Content="💼 Профессии" Command="{Binding ContentSwitch.SelectedCategory}" CommandParameter="Jobs" Margin="0,0,10,0" 
         Style="{StaticResource LearnBut}"/>
         </DockPanel>
         <Button Content="Выход" Style="{StaticResource MenuBut}" Command="{Binding SomethingViewModel.ExitCommand}"  

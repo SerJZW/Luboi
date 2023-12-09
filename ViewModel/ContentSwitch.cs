@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +15,11 @@ namespace VocabVibe.ViewModel
 {
     public class ContentSwitch : Notify
     {
+        private int ClickedTimes = 0;
+        private string? FileName;
+        private string[]? WordsArray;
+        private string[]? TempArr;
+        private string[]? NewWordsList = new string[8];
 
         private DifficultFlag _selectedDifficult;
 
@@ -111,8 +118,6 @@ namespace VocabVibe.ViewModel
                             MyContentControl = new WordLearnView();
 
                             string filePath = string.Empty;
-
-                            // Установка пути к файлу в зависимости от категории
                             switch (category)
                             {
                                 case "Sport":
@@ -121,39 +126,54 @@ namespace VocabVibe.ViewModel
                                 case "City":
                                     filePath = "C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\City.txt";
                                     break;
-                                    // Добавьте остальные категории
+                                case "Jobs":
+                                    filePath = "C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\Jobs.txt";
+                                    break;
+                                case "Weather":
+                                    filePath = "C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\WeatherCard.txt";
+                                    break;
+                                case "Character":
+                                    filePath = "C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\Character.txt";
+                                    break;
+                                case "Apperiance":
+                                    filePath = "C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\Appeariance.txt";
+                                    break;
+                                case "Family":
+                                    filePath = "C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\FamilyCard.txt";
+                                    break;
+                                case "School":
+                                    filePath = "C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\School.txt";
+                                    break;
+                                case "Mood":
+                                    filePath = "C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\Mood.txt";
+                                    break;
                             }
-
-                            // Извлекаем название темы из названия файла
+                            WordsArray = LoadWordsFromFile(filePath);
+                            ClickedTimes = -1;
                             string fileName = Path.GetFileNameWithoutExtension(filePath);
                             string themeName = fileName;
-
-                            // Устанавливаем название темы
+                            string translatedword = TranslatedWord;
                             ThemeName = themeName;
-
-                            // Чтение файла и обработка данных
                             if (!string.IsNullOrEmpty(filePath))
                             {
                                 string fileContent = await Task.Run(() => File.ReadAllText(filePath));
-
-                                // Разбиваем строки файла
                                 string[] lines = fileContent.Split('\n');
-
-                                // Предположим, что первая строка - это английское слово, а вторая - перевод
-                                if (lines.Length >= 2)
+                                if (lines.Length >= 1)
                                 {
-                                    EnglishWord = lines[0].Trim();
-                                    TranslatedWord = lines[1].Trim();
+                                    string[] parts = lines[0].Split(':');
+
+                                    if (parts.Length >= 2)
+                                    {
+                                        EnglishWord = parts[0].Trim();
+                                        TranslatedWord = parts[1].Trim();
+                                        SelectedTranslation = TranslatedWord;
+                                        TranslatedWord = "🤔";
+
+                                    }
                                 }
-
-                                // Обработка данных из файла
-                                // ...
-
-                                // Пример обновления свойств в вашем ViewModel
-                                // ProgressCount = ...;
-                                // MyContentControl = ...;
                             }
                         }
+
                     }
                     catch (Exception ex)
                     {
@@ -163,6 +183,20 @@ namespace VocabVibe.ViewModel
             }
         }
 
+        private string? _selectedTranslation;
+
+        public string? SelectedTranslation
+        {
+            get { return _selectedTranslation; }
+            set
+            {
+                if (_selectedTranslation != value)
+                {
+                    _selectedTranslation = value;
+                    OnPropertyChanged(nameof(SelectedTranslation));
+                }
+            }
+        }
 
         private string? _themeName;
         public string? ThemeName
@@ -192,7 +226,7 @@ namespace VocabVibe.ViewModel
             }
         }
 
-        private string _translatedWord;
+        private string _translatedWord = "🤔";
         public string TranslatedWord
         {
             get { return _translatedWord; }
@@ -219,11 +253,8 @@ namespace VocabVibe.ViewModel
                 }
             }
         }
-        private int ClickedTimes = 0;
-        private string? FileName;
-        private string[]? WordsArray = new string[8];
-        private string[]? TempArr;
-        private string[]? NewWordsList = new string[7];
+
+
 
         public RelayCommand DontNowCommand
         {
@@ -231,50 +262,92 @@ namespace VocabVibe.ViewModel
             {
                 return new RelayCommand(param =>
                 {
-                    if (ClickedTimes < 6 && WordsArray != null && WordsArray.Length > ClickedTimes && WordsArray[ClickedTimes] != null)
+                    if (ClickedTimes < WordsArray.Length - 1)
                     {
                         ClickedTimes++;
                         TempArr = WordsArray[ClickedTimes].Split(':');
                         EnglishWord = TempArr[0];
+                        TranslatedWord = TempArr[1];
                         ProgressCount = (ClickedTimes + 1).ToString();
-                        using (StreamWriter sw = File.AppendText("Vocab.txt"))
-                        {
-                            sw.WriteLine(WordsArray[ClickedTimes]);
-                        }
+                        WordsArray[ClickedTimes] = $"{EnglishWord}:{TranslatedWord}";
+                        SelectedTranslation = TranslatedWord;
                     }
 
-                    if (ClickedTimes == 6)
+                    if (ClickedTimes == WordsArray.Length - 1)
                     {
                         MessageBox.Show("Урок пройден.", "Результат", MessageBoxButton.OK);
+                        ClickedTimes = 0;
                     }
-
                     TranslatedWord = "🤔";
                 });
             }
         }
 
-        public RelayCommand? IKnowCommand
+        public RelayCommand IKnowCommand
         {
             get
             {
                 return new RelayCommand(param =>
                 {
-                    if (ClickedTimes < 6)
+                    if (ClickedTimes < WordsArray.Length - 1)
                     {
                         ClickedTimes++;
                         TempArr = WordsArray[ClickedTimes].Split(':');
                         EnglishWord = TempArr[0];
+                        TranslatedWord = TempArr[1];
                         ProgressCount = (ClickedTimes + 1).ToString();
+                        WordsArray[ClickedTimes] = $"{EnglishWord}:{TranslatedWord}";
+                        SelectedTranslation = TranslatedWord;
+                        var cleanedArray = WordsArray.Select(line => line.Trim());
+                        using (StreamWriter sw = new StreamWriter("C:\\Users\\zemzh\\source\\repos\\VocabVibe\\Files\\Progress.txt", true))
+                        {
+                            sw.WriteLine(cleanedArray);
+                        }
                     }
-                    if (ClickedTimes == 6)
+
+                    if (ClickedTimes == WordsArray.Length - 1)
                     {
                         MessageBox.Show("Урок пройден.", "Результат", MessageBoxButton.OK);
+                        ClickedTimes = 0;
                     }
                     TranslatedWord = "🤔";
                 });
             }
         }
-
+        private string[] LoadWordsFromFile(string filePath)
+        {
+            try
+            {
+                string fileContent = File.ReadAllText(filePath);
+                return fileContent.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading words from file: {ex.Message}");
+                return Array.Empty<string>();
+            }
+        }
+        public RelayCommand TranslateCommand
+        {
+            get
+            {
+                return new RelayCommand(param =>
+                {
+                    if (TranslatedWord == "🤔")
+                    {
+                        TranslatedWord = SelectedTranslation;
+                    }
+                    else
+                    {
+                        TranslatedWord = "🤔";
+                    }
+                });
+            }
+        }
     }
 }
+
+
+
+
 

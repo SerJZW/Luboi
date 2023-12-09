@@ -46,7 +46,7 @@
 
         <Grid Margin="182,139,182,-14" Background="#966aff" Grid.RowSpan="2">
             <Rectangle Fill="Transparent" Width="624" RadiusX="25" RadiusY="25" Margin="0,65,0,197"  Stroke="#fff" StrokeThickness="8" HorizontalAlignment="Center"/>
-            <TextBlock HorizontalAlignment="Center" Margin="27,10,0,0" TextWrapping="Wrap" Text="{Binding ContentSwitch.ThemeName}" VerticalAlignment="Top" Foreground="White" FontSize="30" FontFamily="Verdana"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap" Text="{Binding ContentSwitch.ThemeName}" VerticalAlignment="Top" Foreground="White" FontSize="30" FontFamily="Verdana"/>
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding ContentSwitch.EnglishWord}" VerticalAlignment="Top" FontFamily="Verdana"  FontSize="35" Foreground="White" Margin="0,107,0,0" Name="EnglishWord"/>
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding ContentSwitch.TranslatedWord}" VerticalAlignment="Top" FontSize="30" FontFamily="Verdana" Foreground="White" Margin="0,205,0,0" Name="TranslatedWord" RenderTransformOrigin="0.496,1.855"/>
             <TextBlock HorizontalAlignment="Left" Margin="329,427,0,0" TextWrapping="Wrap" Text="{Binding ContentSwitch.ProgressCount}" VerticalAlignment="Top" Foreground="White" FontSize="30"/>
@@ -54,7 +54,9 @@
                 <Button Name="myButton" Content="Не знаю" Style="{StaticResource QwBut}" Margin="50,0,0,0" Command="{Binding ContentSwitch.DontNowCommand}"/>
                 <Button x:Name="myButton_Copy" Content="Знаю" Style="{StaticResource QwBut}" Margin="170,0,0,0" Command="{Binding ContentSwitch.IKnowCommand}"/>
             </StackPanel>
-            <Button Content="Перевод" Margin="230,275,230,237" Style="{StaticResource QwBut}" Background="Transparent"  FontSize="30" Foreground="White" BorderThickness="0"/>
+            <Button Content="Перевод" Margin="230,275,230,237" Style="{StaticResource QwBut}"
+                    Command="{Binding ContentSwitch.TranslateCommand}"
+                    Background="Transparent"  FontSize="30" Foreground="White" BorderThickness="0"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -20,11 +20,14 @@
         <TextBlock Text="VocabVibe" Style="{StaticResource LogoText}" Margin="0,10,0,0" FontSize="35"/>
         <Rectangle Fill="Transparent" Width="1134" RadiusX="25" RadiusY="25" Margin="0,77,0,173"  Stroke="#fff" StrokeThickness="8" HorizontalAlignment="Center" Grid.Row="1"/>
         <DockPanel VerticalAlignment="Top" Margin="20,128,0,0" Grid.Row="1" Height="200">
-            <Button Content="🌦️ Погода" Margin="5,0,10,0" 
+            <Button Content="🌦️ Погода" Margin="5,0,10,0"
+                Command="{Binding ContentSwitch.SelectedCategory}" CommandParameter="Weather"
+                Style="{StaticResource LearnBut}"/>
+            <Button Content="🏡 Семья и друзья" Margin="10,0,10,0"
+        Command="{Binding ContentSwitch.SelectedCategory}" CommandParameter="Family"
         Style="{StaticResource LearnBut}"/>
-            <Button Content="🏡 Семья и друзья" Margin="10,0,10,0" 
-        Style="{StaticResource LearnBut}"/>
-            <Button Content="🎭 Внешность" Margin="10,0,10,0" 
+            <Button Content="🎭 Внешность" Margin="10,0,10,0"
+        Command="{Binding ContentSwitch.SelectedCategory}" CommandParameter="Apperiance"            
         Style="{StaticResource LearnBut}"/>
         </DockPanel>
         <Button Content="Выход" Style="{StaticResource MenuBut}" Command="{Binding SomethingViewModel.ExitCommand}" 
